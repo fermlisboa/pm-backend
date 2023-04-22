@@ -82,7 +82,7 @@ export class UserController {
    * @param data User data
    * @returns Update result
    ****************************************************************************/
-  @Patch('update/:id')
+  @Patch(':id')
   async updateUser(@Param('id') id: string, @Body() data: User): Promise<User> {
     // Prevent override
     data.id = id;
@@ -104,7 +104,7 @@ export class UserController {
    * @param id Id of User to delete
    * @returns Deletion result
    ****************************************************************************/
-  @Delete('remove/:id')
+  @Delete(':id')
   async deleteUser(@Param('id') id: string): Promise<UpdateResult> {
     try {
       return await this.service.remove(id);
