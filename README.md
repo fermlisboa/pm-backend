@@ -9,8 +9,14 @@ git clone https://github.com/fermlisboa/pm-backend.git
 ```
 
 ```
-cd pm-backend
+code pm-backend
 ```
+
+### DevContainer
+If you want to use DevContainer, intall the Dev Container extension by Microsoft, and then chose to reopen the application in container.
+
+In this case, the entire environment with Postgres database is available.
+
 ```
 yarn install or npm install
 ```
