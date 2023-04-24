@@ -15,7 +15,9 @@ code pm-backend
 ### DevContainer
 If you want to use DevContainer, intall the Dev Container extension by Microsoft, and then chose to reopen the application in container.
 
-In this case, the entire environment with Postgres database is available.
+In this case, the entire environment with Postgres database is available. 
+
+This DevContainer uses all envs setted in the .env.example file
 
 ```
 yarn install or npm install
