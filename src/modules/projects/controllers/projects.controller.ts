@@ -7,6 +7,8 @@ import { parseUser } from 'src/utils/tools';
 import { UserService } from 'src/modules/users/services/user.service';
 import { UpdateProjectDTO } from '../types/updateProjectDTO';
 import { AuthGuard } from 'src/modules/auth/auth.guard';
+import { LocatedProjectDTO } from '../types/locatedProjectDTO';
+import { axiosZip } from 'src/utils/axios';
 
 @Controller('project')
 export class ProjectsController {
@@ -41,9 +43,15 @@ export class ProjectsController {
    * @returns Found Project
    ****************************************************************************/
   @Get(':id')
-  async findProjectById(@Param('id') id: string): Promise<Projects> {
+  async findProjectById(@Param('id') id: string): Promise<LocatedProjectDTO> {
     try {
-      return await this.service.findOne({ where: { id: id }, relations: ['user'] });
+      const project = await this.service.findOne({ where: { id: id }, relations: ['user'] });
+      const location = (await axiosZip.get(`ws/${project.zip_code}/json`)).data
+      const locatedProject = {
+        ...project,
+        location: `${location.localidade}/${location.uf}`
+      }
+      return locatedProject;
     } catch (err) {
       throw new HttpException(
         {
